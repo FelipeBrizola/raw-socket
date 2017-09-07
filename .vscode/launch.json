@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      
+        {
+            "name": "Integrated Terminal/Console",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": true,
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "${workspaceRoot}/client.py",
+            "args": [
+                "192.168.0.16", "50007"
+            ],
+            "cwd": "",
+            "console": "integratedTerminal",
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "Sudo"
+            ]
+        }
+    ]
+}
