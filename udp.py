@@ -12,5 +12,10 @@ def buildPackage(sourcePort, destinationPort, messageLength, checksum, udpHeader
     return package
 
 def format(package):
-    return pack('!HHHH', package['srcPort'], package['dstPort'], package['length'], package['checksum'])
+    
+    header =  pack('!HHHH', package['srcPort'], package['dstPort'], package['length'], package['checksum'])
+
+    header = '1770d431000b0000'
+
+    return header
 

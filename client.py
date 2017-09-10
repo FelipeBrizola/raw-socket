@@ -3,9 +3,10 @@ import socket, sys
 from struct import *
 import ipv4
 import udp
+import ethernet
 
 SRC_PORT = 60000
-DST_PORT = 60000
+DST_PORT = 54321
 
 def checksum(msg):
     s = 0
@@ -31,11 +32,7 @@ def rawsocket():
     except socket.error , msg:
         print 'Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
         sys.exit()
-
-
-        
-
-
+    
 
 if __name__ == "__main__":
     ipDestination = sys.argv[1]
@@ -43,14 +40,19 @@ if __name__ == "__main__":
 
     message = 'abc'
 
-    headerIp = ipv4.buildPackage('127.0.0.1', ipDestination)
-    headerIpFormatted = ipv4.format(headerIp)
+    headerEthernet = ethernet.buildPackage()
+    headerEthernetFormatted = ethernet.format(headerEthernet)
 
-    headerUdp = udp.buildPackage(SRC_PORT, DST_PORT, len(message), 0)
+    headerUdp = udp.buildPackage(SRC_PORT, portDestination, len(message), 0)
     headerUdpFormatted = udp.format(headerUdp)
+
+    headerIp = ipv4.buildPackage('192.168.0.14', ipDestination, len(headerUdpFormatted))
+    headerIpFormatted = ipv4.format(headerIp)    
     
 
-    package = headerIpFormatted + headerUdpFormatted + message
+    package = headerEthernetFormatted + headerIpFormatted + headerUdpFormatted + message
+
+    print str(package)
 
     sock = rawsocket()
     sock.sendto(package, (ipDestination, portDestination))

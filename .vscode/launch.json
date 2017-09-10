@@ -10,7 +10,7 @@
             "pythonPath": "${config:python.pythonPath}",
             "program": "${workspaceRoot}/client.py",
             "args": [
-                "192.168.0.16", "50007"
+                "192.168.0.11", "54321"
             ],
             "cwd": "",
             "console": "integratedTerminal",
