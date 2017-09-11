@@ -1,7 +1,7 @@
 import socket
 from struct import *
         
-def buildPackage(ip_src_addr, ip_dest_addr, ip_proto=socket.IPPROTO_UDP, ip_ver=4, ip_ihl=5, ip_tos=0, ip_id=4321, ip_frag_off=0, ip_ttl=64, udpLen):
+def buildPackage(ip_src_addr, ip_dest_addr, udpLen, ip_proto=socket.IPPROTO_UDP, ip_ver=4, ip_ihl=5, ip_tos=0, ip_id=4321, ip_frag_off=0, ip_ttl=64):
     
     package = {
         'ip_ver'       : ip_ver, # 4 bits
@@ -28,7 +28,15 @@ def format(package):
                                 package['ip_id'], package['ip_frag_off'],
                                 package['ip_ttl'], package['ip_proto'], package['ip_check'],
                                 package['ip_src_addr'], package['ip_dest_addr'])
+    lenght = '002e'
+    ver_and_tos = '4500' 
+    ip_id = '10e1'
+    frag = '0000'
+    ttl = '40'
+    proto = '11'
+    check = '0000'
+    ips = 'c0a8000ec0a8000b'
 
-    header = '450000001111000040110000c0a8000ec0a8000bea'
+    header = ver_and_tos + lenght + ip_id + frag + ttl + proto + check + ips
 
     return header

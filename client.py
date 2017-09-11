@@ -8,22 +8,6 @@ import ethernet
 SRC_PORT = 60000
 DST_PORT = 54321
 
-def checksum(msg):
-    s = 0
-     
-    # loop taking 2 characters at a time
-    for i in range(0, len(msg), 2):
-        w = ord(msg[i]) + (ord(msg[i+1]) << 8 )
-        s = s + w
-     
-    s = (s>>16) + (s & 0xffff);
-    s = s + (s >> 16);
-     
-    #complement and mask to 4 byte short
-    s = ~s & 0xffff
-     
-    return s
-
 def rawsocket():
     # IPPROTO_UDP
     # IPPROTO_RAW
@@ -38,14 +22,17 @@ if __name__ == "__main__":
     ipDestination = sys.argv[1]
     portDestination = int(sys.argv[2])
 
-    message = 'abc'
+    message = 'abcdefghijklmnopqrstuvxz'
 
+    # ETHERNET
     headerEthernet = ethernet.buildPackage()
     headerEthernetFormatted = ethernet.format(headerEthernet)
 
+    # UDP
     headerUdp = udp.buildPackage(SRC_PORT, portDestination, len(message), 0)
     headerUdpFormatted = udp.format(headerUdp)
 
+    # IP
     headerIp = ipv4.buildPackage('192.168.0.14', ipDestination, len(headerUdpFormatted))
     headerIpFormatted = ipv4.format(headerIp)    
     

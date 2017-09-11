@@ -15,7 +15,12 @@ def format(package):
     
     header =  pack('!HHHH', package['srcPort'], package['dstPort'], package['length'], package['checksum'])
 
-    header = '1770d431000b0000'
+    src = '1770'
+    dst = 'd431'
+    length = '001a'
+    check = '0000'
+
+    header = src + dst + length + check
 
     return header
 
