@@ -9,6 +9,9 @@ def encode(transport_packet, dest_ip):
 	ip_packet = buildIPv4Packet(transport_packet, src_ip, dest_ip)
 	return ethernet.encode(ip_packet, dest_ip)
         
+def decode(packet_ip):
+    if( dest_ip == my_ip )
+        
 def buildIPv4Packet(transport_packet, ip_src_addr, ip_dest_addr, ip_proto=socket.IPPROTO_UDP, ip_ver=4, ip_ihl=5, ip_tos=0, ip_id=4321, ip_frag_off=0, ip_ttl=64):
     
     	headerIpSize = 20

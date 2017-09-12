@@ -9,6 +9,8 @@ import ethernet
 SRC_PORT = 60000
 DST_PORT = 54321
 
+app.sendMessage("REQUEST_QUESTIONS|2")
+
 def checksum(msg):
     s = 0
      

@@ -4,4 +4,3 @@ def sendMessage(message):
 
 
 def receiveMessage(message):
-    if message[
