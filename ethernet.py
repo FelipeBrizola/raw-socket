@@ -22,6 +22,16 @@ def buildEthernetPacket(ip_package, src_mac, dest_mac, network_protocol ='0800' 
 	header = dest_mac + src_mac + network_protocol
 	print("\n## HEX HEADER ETHERNET ("+ str(len(header)/2)+" bytes)\n" + header + "\n")
 	return header + ip_package
+
+def openPackage(encodedPackage):
+
+    decodedPackage = {
+        'dstMac': encodedPackage[0:12], 
+        'srcMac': encodedPackage[12:24], 
+        'ethertype': encodedPackage[24:28] 
+    }
+
+    return decodedPackage
 	
 	
 	
