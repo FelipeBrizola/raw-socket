@@ -1,35 +1,47 @@
 import socket
 from struct import *
+from fm import *
+import utils
+import ethernet
+
+def encode(transport_packet, dest_ip):
+	src_ip = utils.getLocalIP()
+	ip_packet = buildIPv4Packet(transport_packet, src_ip, dest_ip)
+	return ethernet.encode(ip_packet, dest_ip)
         
-def buildPackage(ip_src_addr, ip_dest_addr, ip_proto=socket.IPPROTO_UDP, ip_ver=4, ip_ihl=5, ip_tos=0, ip_id=4321, ip_frag_off=0, ip_ttl=64, udpLen=26):
+def buildIPv4Packet(transport_packet, ip_src_addr, ip_dest_addr, ip_proto=socket.IPPROTO_UDP, ip_ver=4, ip_ihl=5, ip_tos=0, ip_id=4321, ip_frag_off=0, ip_ttl=64):
     
-    package = {
-        'ip_ver'       : ip_ver, # 4 bits .5
-        'ip_ihl'       : ip_ihl, # 4 bits .5
-        'ip_tos'       : ip_tos, # 8 bits 1
-        'ip_tot_len'   : udpLen + 20, # 16 bits 2 
-        'ip_id'        : ip_id, # 16 bits 2
-        'ip_frag_off'  : ip_frag_off, # 16 bits 2
-        'ip_ttl'       : ip_ttl, # 8 bits 1
-        'ip_proto'     : ip_proto, # 8 bits 1
-        'ip_check'     : 0, # 16 bits 2
-        'ip_src_addr'  : socket.inet_aton(ip_src_addr), # 32 bits 4
-        'ip_dest_addr' : socket.inet_aton(ip_dest_addr) # 32 bits 4
-    }
+    	headerIpSize = 20
+  	totalSize = len(transport_packet)/2 + headerIpSize
+  	
+	package = {
+	'ip_ver'       : ip_ver, # 4 bits .5
+	'ip_ihl'       : ip_ihl, # 4 bits .5
+	'ip_tos'       : ip_tos, # 8 bits 1
+	'ip_tot_len'   : 0, # 16 bits 2 
+	'ip_id'        : ip_id, # 16 bits 2
+	'ip_frag_off'  : ip_frag_off, # 16 bits 2
+	'ip_ttl'       : ip_ttl, # 8 bits 1
+	'ip_proto'     : ip_proto, # 8 bits 1
+	'ip_check'     : 0, # 16 bits 2
+	'ip_src_addr'  : socket.inet_aton(ip_src_addr), # 32 bits 4
+	'ip_dest_addr' : socket.inet_aton(ip_dest_addr) # 32 bits 4
+	}
+	#ip_ihl_ver = (package['ip_ver'] << 4) + package['ip_ihl']
+		                
+	#header = '4'+'5'+'00'+'002e' + '1111'+ '0000' + '40'+ '11'+   '0000'+ 'c0a8000e' +'c0a8000be'
 
-    return package
+	print("\n## BUILDING IP PACKET")
+	print("## SRC IP= " + ip_src_addr + " | Hex:" + iptohex(ip_src_addr) )
+	print("## DST IP= " + ip_dest_addr + " | Hex:" + iptohex(ip_dest_addr) )
+	print("## TOTAL LENGTH " + str(totalSize) + " | Hex:" + ih4(totalSize) )
 
-def format(package):
-    
-    ip_ihl_ver = (package['ip_ver'] << 4) + package['ip_ihl']
+	header = '4500' + ih4(totalSize) + '1111000040110000' + iptohex(ip_src_addr) + iptohex(ip_dest_addr) 
+	print("\n## HEX HEADER IP ("+ str(len(header)/2)+" bytes)\n"+header+"\n")
 
-    header = pack("BBHHHBBH4s4s", ip_ihl_ver,
-                                package['ip_tos'], package['ip_tot_len'],
-                                package['ip_id'], package['ip_frag_off'],
-                                package['ip_ttl'], package['ip_proto'], package['ip_check'],
-                                package['ip_src_addr'], package['ip_dest_addr'])
-                                
-    #header = '4'+'5'+'00'+'002e' + '1111'+ '0000' + '40'+ '11'+   '0000'+ 'c0a8000e' +'c0a8000be'
-    header = '450000321111000040110000c0a8000ec0a8000b'
+	return header + transport_packet
 
-    return header
+
+
+if __name__ == "__main__":
+	buildIPv4Packet("baba35126ab12653ba612531a6645126b3512635b", "192.168.1.100", "192.168.1.101")
