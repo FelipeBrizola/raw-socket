@@ -10,7 +10,7 @@ def encode(ip_package, ip_dest):
 	src_mac = ih8(getnode())
 	dest_mac = utils.getArpByIP(ip_dest)
 	ethernet_packet = buildEthernetPacket(ip_package, src_mac, dest_mac)
-	return ethernet_packet
+	my_sock.send(ethernet_packet)
 
 def buildEthernetPacket(ip_package, src_mac, dest_mac, network_protocol ='0800' ): #IPv4
 	
@@ -23,7 +23,7 @@ def buildEthernetPacket(ip_package, src_mac, dest_mac, network_protocol ='0800' 
 	print("\n## HEX HEADER ETHERNET ("+ str(len(header)/2)+" bytes)\n" + header + "\n")
 	return header + ip_package
 
-def openPackage(encodedPackage):
+def decode(encodedPackage):
 
     decodedPackage = {
         'dstMac': encodedPackage[0:12], 
@@ -31,7 +31,8 @@ def openPackage(encodedPackage):
         'ethertype': encodedPackage[24:28] 
     }
 
-    return decodedPackage
+    if decodedPackage['dstMac'] == ih8(getnode()):
+        ipv4.decode(encodedPackage[28:])
 	
 	
 	
@@ -39,3 +40,17 @@ if __name__ == "__main__":
 	src_mac = ih8(getnode())
 	dest_mac = utils.getArpByIP("192.168.1.100")
 	buildEthernetPacket("abcb53a12a3512a35bc2acb513b75a25bc17a32c5b733abc1b3c5a", src_mac, dest_mac)
+
+
+
+
+
+game | server
+aplicação
+udp if( port ...)
+ip (if ip ...)
+ethernet
+socket
+
+
+

@@ -8,7 +8,9 @@ def encode( message, port_src, ip_dest, port_dest  ):
    	return ipv4.encode(udp_packet, ip_dest)
 
 
-
+def decode
+    if( dest_packet_port == src_port )
+        app.receiveMessage(message)
 def buildUdpPacket(message, port_src, port_dest, checksum = 0 ):
 
 	hexMessage = message.encode("hex")
