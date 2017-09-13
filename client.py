@@ -9,27 +9,9 @@ import ethernet
 SRC_PORT = 60000
 DST_PORT = 54321
 
-app.sendMessage("REQUEST_QUESTIONS|2")
-
-def checksum(msg):
-    s = 0
-     
-    # loop taking 2 characters at a time
-    for i in range(0, len(msg), 2):
-        w = ord(msg[i]) + (ord(msg[i+1]) << 8 )
-        s = s + w
-     
-    s = (s>>16) + (s & 0xffff);
-    s = s + (s >> 16);
-     
-    #complement and mask to 4 byte short
-    s = ~s & 0xffff
-     
-    return s
+#app.sendMessage("REQUEST_QUESTIONS|2")
 
 def rawsocket():
-    # IPPROTO_UDP
-    # IPPROTO_RAW
     try:
         #return socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_RAW)
         return socket.socket(socket.AF_PACKET, socket.SOCK_RAW)
@@ -56,12 +38,9 @@ if __name__ == "__main__":
 
     package = headerEthernetFormatted + headerIpFormatted + headerUdpFormatted + message
    
-    #package = headerIpFormatted + headerUdpFormatted + message
-
     print str(package)
 
     sock = rawsocket()
-    #sock.sendto(package.decode('hex'), (ipDestination, portDestination))
     sock.bind(("wlp1s0", 0))
     sock.send(package.decode("hex"))
     sock.shutdown(socket.SHUT_RDWR)

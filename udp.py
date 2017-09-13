@@ -3,18 +3,27 @@ import ipv4
 from fm import *
 
 
-def encode( message, port_src, ip_dest, port_dest  ):
+def encode( message, port_src, ip_dest, port_dest ):
    	udp_packet = buildUdpPacket(message, port_src, port_dest)
    	return ipv4.encode(udp_packet, ip_dest)
 
 
-def decode
-    if( dest_packet_port == src_port )
-        app.receiveMessage(message)
+def decode(encodedPacket):
+
+    decodedPacket = {
+		"srcPort": encodedPacket[0:4],
+		"dstPort": encodedPacket[4:8],
+		"data": encodedPacket[8:]
+	}
+
+	print decodedPacket
+
+	return decodedPacket
+
 def buildUdpPacket(message, port_src, port_dest, checksum = 0 ):
 
 	hexMessage = message.encode("hex")
-	udpHeaderSize=8
+	udpHeaderSize = 8
 	udpSize = udpHeaderSize + (len(hexMessage)/2)
 	
 	print("\n## BUILD UDP PACKET ")

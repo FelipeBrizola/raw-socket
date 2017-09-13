@@ -17,9 +17,8 @@ if __name__ == "__main__":
     while True:
         network_data = sock.recv(2048)
         encoded = network_data.encode('hex')
-        ethernetFrame = ethernet.openPackage(encoded)
-        print ethernetFrame['dstMac']
-        print ethernetFrame['srcMac']
-        print ethernetFrame['ethertype']
-        
+        print encoded
         print '\n'
+                
+
+        
