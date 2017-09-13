@@ -19,8 +19,8 @@ def decode(encodedPackage):
         'ethertype': encodedPackage[24:28] 
     }
 
-    if decodedPackage['dstMac'] == ih8(getnode()):
-        ipv4.decode(encodedPackage[28:])
+    if decodedPackage['dstMac'] == ih8(getnode()) and decodedPackage['ethertype'] == '0800':
+       return ipv4.decode(encodedPackage[28:])
 
 
 
@@ -38,8 +38,8 @@ def buildEthernetPacket(ip_package, src_mac, dest_mac, network_protocol ='0800' 
 	
 if __name__ == "__main__":
 	src_mac = ih8(getnode())
-	dest_mac = utils.getArpByIP("192.168.1.100")
-	buildEthernetPacket("abcb53a12a3512a35bc2acb513b75a25bc17a32c5b733abc1b3c5a", src_mac, dest_mac)
-
+	#dest_mac = utils.getArpByIP("192.168.1.100")
+	#buildEthernetPacket("abcb53a12a3512a35bc2acb513b75a25bc17a32c5b733abc1b3c5a", src_mac, dest_mac)
+	decode('61b9f439ad3020c9d0d326d1080045000048827e0000401175cdc0a8000ac0a800ffe115e11500341c4453706f7455647030503afd3139d9eef3000100044895c2034cd2c3964c5e21cbb49e8e15371c943163aea528')
 
 
