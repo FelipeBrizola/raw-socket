@@ -13,12 +13,14 @@ def decode(encodedPacket):
     decodedPacket = {
 		"srcPort": encodedPacket[0:4],
 		"dstPort": encodedPacket[4:8],
-		"data": encodedPacket[8:]
+        "length": encodedPacket[8:12],
+		"checksum": encodedPacket[12:16],
+        "data": encodedPacket[16:]
 	}
 
-	print decodedPacket
+    print decodedPacket
 
-	return decodedPacket
+    return decodedPacket
 
 def buildUdpPacket(message, port_src, port_dest, checksum = 0 ):
 

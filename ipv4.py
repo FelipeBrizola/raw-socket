@@ -3,6 +3,7 @@ from struct import *
 from fm import *
 import utils
 import ethernet
+import udp
 
 def encode(transport_packet, dest_ip):
 	src_ip = utils.getLocalIP()
@@ -11,7 +12,7 @@ def encode(transport_packet, dest_ip):
         
 def decode(encodedPacket):
 	myIp = "192.168.0.13" # funcao de bucar meu ip retorna 127.0.0.1
-	udpProtocol = 11
+	udpProtocol = '11'
 
 	decodedPacket = {
     	"srcIp": encodedPacket[24:32], 
@@ -19,10 +20,9 @@ def decode(encodedPacket):
         "protocol": encodedPacket[18:20] 
     }
 
-	print decodedPacket
+	print decodedPacket, iptohex(myIp)
 
-	if (decodedPacket['srcIp'] == myIp) and (decodedPacket['protocol'] == updProtocol):
-        return udp.decode(encodedPacket[40:])
+	if decodedPacket['dstIp'] == iptohex(myIp) and decodedPacket['protocol'] == udpProtocol: return udp.decode(encodedPacket[40:])
 
 def buildIPv4Packet(transport_packet, ip_src_addr, ip_dest_addr, ip_proto=socket.IPPROTO_UDP, ip_ver=4, ip_ihl=5, ip_tos=0, ip_id=4321, ip_frag_off=0, ip_ttl=64):
     
@@ -56,4 +56,5 @@ def buildIPv4Packet(transport_packet, ip_src_addr, ip_dest_addr, ip_proto=socket
 
 if __name__ == "__main__":
 	#buildIPv4Packet("baba35126ab12653ba612531a6645126b3512635b", "192.168.1.100", "192.168.1.101")
-	decode('45000048827e0000401175cdc0a8000ac0a800ffe115e11500341c4453706f7455647030503afd3139d9eef3000100044895c2034cd2c3964c5e21cbb49e8e15371c943163aea528')
+	decode('45000048827e0000401175cdc0a8000ac0a8000de115e11500341c4453706f7455647030503afd3139d9eef3000100044895c2034cd2c3964c5e21cbb49e8e15371c943163aea528')
+    # ffffffffffff20c9d0d326d1080045000048827e0000401175cdc0a8000ac0a800ffe115e11500341c4453706f7455647030503afd3139d9eef3000100044895c2034cd2c3964c5e21cbb49e8e15371c943163aea528
