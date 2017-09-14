@@ -65,7 +65,7 @@ def recv(packet, my_port):
 def build(message, dest_ip, dest_port, src_port ):
 	udp_packet = udp.encode(message, src_port, dest_port )
 	ip_packet = ipv4.encode(udp_packet, utils.getLocalIP(), dest_ip )
-	ethernet_packet = ethernet.encode(ip_packet, utils.getLocalMac(), "e894f6acea70") #e894f6acea70  #24f5aa67cf7a
+	ethernet_packet = ethernet.encode(ip_packet, utils.getLocalMac(), utils.getMacByIP(dest_ip)) #e894f6acea70  #24f5aa67cf7a
 	
 	return ethernet_packet
 	
