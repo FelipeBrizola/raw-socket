@@ -1,18 +1,35 @@
-from struct import *
+from constants import *
+from fm import *
+import utils
 
-# def buildPackage(dstMac='\xd4\xdc\xcd\xba\xfb\xf1', srcMac='\x20\xc9\xd0\xd3\x26\xd1', ethertype='\x80\x00'):
-# def buildPackage(dstMac=0xd4dccdbafbf1, srcMac=0x20c9d0d326d1, ethertype=0x8000):
+###############################
+########### DECODE ############
+###############################
+def decode(encodedPackage):
+	return  {
+		'dest_mac': encodedPackage[0:12], 
+		'src_mac': encodedPackage[12:24], 
+		'protocol': encodedPackage[24:28] 
+	}
 
+###############################
+########### ENCODE ############
+###############################
+def encode(ip_package, src_mac, dest_mac):
+	print("\n## BUILDING ETHERNET PACKET SOURCE ")
+	print("## Src Mac  = " + src_mac  )
+	print("## Dest Mac = " + dest_mac  )
+	print("## Network Protocol = " + ETHERNET_PROT_IPV4  )
+	
+	header = dest_mac + src_mac + ETHERNET_PROT_IPV4
+	print("\n## HEX HEADER ETHERNET ("+ str(len(header)/2)+" bytes)\n" + header + "\n")
+	return header + ip_package
 
-def buildPackage(dstMac='d4dccdbafbf1', srcMac='20c9d0d326d1', ethertype='0800'):
+###############################
+########### TESTS #############
+###############################
+if __name__ == "__main__":
+	src_mac = utils.getLocalMac()
+	dest_mac = utils.getArpByIP("192.168.1.103")
+	encode("abcb53a12a3512a35bc2acb513b75a25bc17a32c5b733abc1b3c5a", src_mac, dest_mac)
 
-    package = {
-        'dstMac': dstMac, 
-        'srcMac': srcMac, 
-        'ethertype': ethertype 
-    }
-
-    return package
-
-def format(package):
-    return package['dstMac'] + package['srcMac'] + package['ethertype']
