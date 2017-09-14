@@ -12,8 +12,6 @@ def decode(encodedPackage):
 		'protocol': encodedPackage[24:28] 
 	}
 
-
-	
 ###############################
 ########### ENCODE ############
 ###############################
@@ -26,9 +24,6 @@ def encode(ip_package, src_mac, dest_mac):
 	header = dest_mac + src_mac + ETHERNET_PROT_IPV4
 	print("\n## HEX HEADER ETHERNET ("+ str(len(header)/2)+" bytes)\n" + header + "\n")
 	return header + ip_package
-
-	
-
 
 ###############################
 ########### TESTS #############
