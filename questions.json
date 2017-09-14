@@ -1,6 +1,7 @@
 [
     [
-        {
+        {   
+            "reward": "10",
             "question": "Quantos bits possui 1 byte?",
             "answers": [
                 "8",
@@ -8,9 +9,10 @@
                 "4",
                 "16"
             ],
-            "corretAnswers": 0
+            "correctAnswerIndex": 0
         },
         {
+            "reward": "10",
             "question": "O protocolo UDP está situado em qual camada?",
             "answers": [
                 "aplicacao",
@@ -18,11 +20,12 @@
                 "fisica",
                 "enlace"
             ],
-            "corretAnswers": 1
+            "correctAnswerIndex": 1
         }
     ],
     [
         {
+            "reward": "100",
             "question": "Quem foi o autor do metodo de ordenacao quicksort?",
             "answers": [
                 "Tony Hoare",
@@ -30,9 +33,10 @@
                 "Alan Turing",
                 "John von Neumann"
             ],
-            "corretAnswers": 0
+            "correctAnswerIndex": 0
         },
         {
+            "reward": "100",
             "question": "O numero 10 em decimal equivale a qual das alternativas em binario?",
             "answers": [
                 "111",
@@ -40,11 +44,12 @@
                 "10",
                 "1100"
             ],
-            "corretAnswers": 1
+            "correctAnswerIndex": 1
         }
     ],
     [
         {
+            "reward": "100000",
             "question": "O numero 10 em hexadecimal equivale a qual das alternativas em decimal?",
             "answers": [
                 "10",
@@ -52,9 +57,11 @@
                 "a",
                 "6"
             ],
-            "corretAnswers": 2
+            "correctAnswerIndex": 2
         },
         {
+            
+            "reward": "100000",
             "question": "A diferenca entre o charme e o funk eh que um anda bonito e o outro...?",
             "answers": [
                 "feio",
@@ -62,7 +69,7 @@
                 "estiloso",
                 "elegante"
             ],
-            "corretAnswers": 3
+            "correctAnswerIndex": 3
         }
     ]
 ]

@@ -28,7 +28,7 @@ def recv(packet, my_port):
 		#print("ETH: PROTOCOL NOT EQUAL")
 		return -1
 	
-	print ethernet_decoded
+	#print ethernet_decoded
 	
 	#CUT UDP HEADER FROM PACKET
 	packet = packet[ETHERNET_HEADER_SIZE*2:]
@@ -60,8 +60,8 @@ def recv(packet, my_port):
 	############################################
 	udp_decoded = udp.decode(packet)
 	
-	if udp_decoded['dest_port'] != my_port:
-		return -1
+	#if udp_decoded['dest_port'] != my_port:
+	#	return -1
 	
 	return{
 		'from_ip': hextoip(ipv4_decoded['src_ip']),
