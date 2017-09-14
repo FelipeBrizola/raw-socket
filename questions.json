@@ -1,0 +1,68 @@
+[
+    [
+        {
+            "question": "Quantos bits possui 1 byte?",
+            "answers": [
+                "8",
+                "2",
+                "4",
+                "16"
+            ],
+            "corretAnswers": 0
+        },
+        {
+            "question": "O protocolo UDP está situado em qual camada?",
+            "answers": [
+                "aplicacao",
+                "transporte",
+                "fisica",
+                "enlace"
+            ],
+            "corretAnswers": 1
+        }
+    ],
+    [
+        {
+            "question": "Quem foi o autor do metodo de ordenacao quicksort?",
+            "answers": [
+                "Tony Hoare",
+                "Dijkstra",
+                "Alan Turing",
+                "John von Neumann"
+            ],
+            "corretAnswers": 0
+        },
+        {
+            "question": "O numero 10 em decimal equivale a qual das alternativas em binario?",
+            "answers": [
+                "111",
+                "1010",
+                "10",
+                "1100"
+            ],
+            "corretAnswers": 1
+        }
+    ],
+    [
+        {
+            "question": "O numero 10 em hexadecimal equivale a qual das alternativas em decimal?",
+            "answers": [
+                "10",
+                "d",
+                "a",
+                "6"
+            ],
+            "corretAnswers": 2
+        },
+        {
+            "question": "A diferenca entre o charme e o funk eh que um anda bonito e o outro...?",
+            "answers": [
+                "feio",
+                "charmoso",
+                "estiloso",
+                "elegante"
+            ],
+            "corretAnswers": 3
+        }
+    ]
+]
