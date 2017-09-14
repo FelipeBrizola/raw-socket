@@ -8,7 +8,7 @@ def getMacDefaultGateway():
 	return getMacByIP( get_default_gateway_ip_linux() )
 
 def getLocalMac():
-	return ih8(getnode())
+	return ih12(getnode())
 
 def getLocalIP():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

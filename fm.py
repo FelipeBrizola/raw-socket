@@ -12,6 +12,9 @@ def ih4(value):
 def ih8(value):
 	return format(value, '08x')
 	
+def ih12(value):
+	return format(value, '012x')
+
 def sh(value):
 	return value.encode("hex")
 
