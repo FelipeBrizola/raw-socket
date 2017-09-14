@@ -10,10 +10,7 @@ import app
 
 def recv(packet, my_port):
 	my_mac = utils.getLocalMac()
-	my_ip = utils.getLocalIP()
-	
-	#my_ip = "192.168.1.102" # funcao de bucar meu ip retorna 127.0.0.1
-	#my_mac = '985fd3613bfa'
+	my_ip = utils.getLocalIP()	
 	
 	############################################
 	## ETHERNET 
@@ -28,28 +25,21 @@ def recv(packet, my_port):
 		#print("ETH: PROTOCOL NOT EQUAL")
 		return -1
 	
-	#print ethernet_decoded
-	
 	#CUT UDP HEADER FROM PACKET
 	packet = packet[ETHERNET_HEADER_SIZE*2:]
 	
-	
+
 	
 	############################################
 	## IPV4 
 	############################################
-	ipv4_decoded = ipv4.decode(packet)
-	
-	
+	ipv4_decoded = ipv4.decode(packet)	
 
-	
 	if hextoip(ipv4_decoded['dest_ip']) != my_ip:
 		return -1
 	
 	if ipv4_decoded['protocol'] != IP_PROT_UDP:
 		return -1
-
-	print ipv4_decoded, iptohex(my_ip)
 	
 	#CUT IP HEADER FROM PACKET
 	packet = packet[IP_HEADER_SIZE*2:]
@@ -60,9 +50,9 @@ def recv(packet, my_port):
 	############################################
 	udp_decoded = udp.decode(packet)
 	
-	#if udp_decoded['dest_port'] != my_port:
-	#	return -1
-	
+	if udp_decoded['dest_port'] != my_port:
+		return -1
+
 	return{
 		'from_ip': hextoip(ipv4_decoded['src_ip']),
 		'from_port': udp_decoded['src_port'],
