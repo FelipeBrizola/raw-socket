@@ -15,7 +15,7 @@ class Game:
 			return self.handleCongratulationsMessageRequest()
 		
 		if request[FUNCTION] == GAME_OVER_MESSAGE:
-			return self.handleGameOverMessageRequest():
+			return self.handleGameOverMessageRequest()
 			
 		return -1
 
