@@ -4,7 +4,7 @@ from uuid import getnode
 import re
 import socket
 def getMyInterfaceName():
-	return "wlp2s0"
+	return "wlp1s0"
 	
 def getMacDefaultGateway():
 	return getMacByIP( get_default_gateway_ip_linux() )

@@ -4,16 +4,25 @@ import sys
 
 
 def printWelcomeMessage():
-	welcome_message = my_api.request(requestWelcomeMessage(), server_ip, server_port, my_port)['message']
-	print '\n' + welcome_message + '\n'
+	welcome_messages = my_api.request(requestWelcomeMessage(), server_ip, server_port, my_port)['messages']
+	print ''
+	for msg in welcome_messages:
+		print msg
+	print ''
 
 def printCongratulationsMessage():
-	congratulations_message = my_api.request(requestCongratulationsMessage(), server_ip, server_port, my_port)['message']
-	print '\n' + congratulations_message + '\n'
+	congratulations_messages = my_api.request(requestCongratulationsMessage(), server_ip, server_port, my_port)['messages']
+	print ''
+	for msg in congratulations_messages:
+		print msg
+	print ''
 
 def printGameOverMessage():
-	game_over_message = my_api.request(requestGameOverMessage(), server_ip, server_port, my_port)['message']
-	print '\n' + game_over_message + '\n'
+	game_over_messages = my_api.request(requestGameOverMessage(), server_ip, server_port, my_port)['messages']
+	print ''
+	for msg in game_over_messages:
+		print msg
+	print ''
 
 def askQuestion(level):
 	response = my_api.request(requestQuestion(level), server_ip, server_port, my_port)

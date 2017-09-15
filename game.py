@@ -28,13 +28,23 @@ class Game:
 		return json.dumps(question)
 
 	def handleWelcomeMessageRequest(self):
-		return '{"messages":[ "Bem vindo ao show do milhao","Responda as perguntas corretamente"]}'
+		msg_1 = '########################################'
+		msg_2 = '##### Bem vindo ao show do milhao ######'
+		msg_3 = '## Responda as perguntas corretamente ##'
+		msg_4 = '########################################'
+		return '{"messages":[ "'+msg_1+'", "'+msg_2+'",  "'+msg_3+'",  "'+msg_4+'"]}'
 
 	def handleCongratulationsMessageRequest(self):
-		return '{"message":"Parabens, voce ganhou no show do milhao!"}'
+		msg_1 = '#########################################'
+		msg_2 = '########  CONGRATZ | YOU WIN  ###########'
+		msg_3 = '#########################################'
+		return '{"messages":[ "'+msg_1+'", "'+msg_2+'",  "'+msg_3+'" ]}'
 
 	def handleGameOverMessageRequest(self):
-		return '{"message":"Voce PERDEU :( | GAME OVER | BYE"}'
+		msg_1 = '#########################################'
+		msg_2 = '#############  YOU LOOSE  ###############'
+		msg_3 = '#########################################'
+		return '{"messages":[ "'+msg_1+'", "'+msg_2+'",  "'+msg_3+'" ]}'
 
 if __name__ == "__main__":
 	g = Game()
