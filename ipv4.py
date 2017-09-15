@@ -1,5 +1,6 @@
 from fm import *
 from constants import *
+from debug import *
 
 ###############################
 ########### DECODE ############
@@ -22,13 +23,14 @@ def decode(encodedPacket):
 
 def encode(transport_packet, src_ip, dest_ip):
     totalSize = len(transport_packet) /2 + IP_HEADER_SIZE
-    print("\n## BUILDING IP PACKET")
-    print("## SRC IP= " + src_ip + " | Hex:" + iptohex(src_ip) )
-    print("## DST IP= " + dest_ip + " | Hex:" + iptohex(dest_ip) )
-    print("## TOTAL LENGTH " + str(totalSize) + " | Hex:" + ih4(totalSize) )
-
     header = '4500' + ih4(totalSize) + '1111000040110000' + iptohex(src_ip) + iptohex(dest_ip)
-    print("\n## HEX HEADER IP ("+ str(len(header)/2)+" bytes)\n"+header+"\n")
+    
+    if DEBUG_IP_PACKET:
+        print("\n## BUILDING IP PACKET")
+        print("## SRC IP= " + src_ip + " | Hex:" + iptohex(src_ip) )
+        print("## DST IP= " + dest_ip + " | Hex:" + iptohex(dest_ip) )
+        print("## TOTAL LENGTH " + str(totalSize) + " | Hex:" + ih4(totalSize) )
+        print("\n## HEX HEADER IP ("+ str(len(header)/2)+" bytes)\n"+header+"\n")
 
     return header + transport_packet
 

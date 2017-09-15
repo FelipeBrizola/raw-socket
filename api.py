@@ -31,7 +31,8 @@ class API:
 	
 	def request(self, message, dest_ip, dest_port, src_port):
 		self.sendUdpPackage(message, dest_ip, dest_port, src_port)
-		return self.receiveUdpPackage(src_port)
+		(status, response) = self.receiveUdpPackage(src_port)
+		return response['message']
 		
 	def listen(self, request_processor, port):
 		(status, packet_info) = self.receiveUdpPackage(port)

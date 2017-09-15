@@ -1,5 +1,6 @@
 from constants import *
 from fm import *
+from debug import *
 import utils
 
 ###############################
@@ -16,13 +17,14 @@ def decode(encodedPackage):
 ########### ENCODE ############
 ###############################
 def encode(ip_package, src_mac, dest_mac):
-	print("\n## BUILDING ETHERNET PACKET SOURCE ")
-	print("## Src Mac  = " + src_mac  )
-	print("## Dest Mac = " + dest_mac  )
-	print("## Network Protocol = " + ETHERNET_PROT_IPV4  )
-	
 	header = dest_mac + src_mac + ETHERNET_PROT_IPV4
-	print("\n## HEX HEADER ETHERNET ("+ str(len(header)/2)+" bytes)\n" + header + "\n")
+
+	if DEBUG_ETHERNET_PACKET:
+		print("\n## BUILDING ETHERNET PACKET SOURCE ")
+		print("## Src Mac  = " + src_mac  )
+		print("## Dest Mac = " + dest_mac  )
+		print("## Network Protocol = " + ETHERNET_PROT_IPV4  )
+		print("\n## HEX HEADER ETHERNET ("+ str(len(header)/2)+" bytes)\n" + header + "\n")
 	return header + ip_package
 
 ###############################

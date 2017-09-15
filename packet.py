@@ -1,6 +1,7 @@
 from constants import *
 import utils
 from fm import *
+from debug import *
 
 import ethernet
 import ipv4
@@ -10,6 +11,10 @@ import udp
 #returns -1 if the packet is not for our machine
 #returns object with message, src_ip and src_port if packet is for our machine
 def decode(packet, my_port):
+	
+	if DEBUG_ALL_PACKETS_TO_MY_MAC:
+		print ("["+packet+"]")
+		
 	my_mac = utils.getLocalMac()
 	my_ip = utils.getLocalIP()	
 	
@@ -26,11 +31,15 @@ def decode(packet, my_port):
 		#print("ETH: PROTOCOL NOT EQUAL")
 		return -1
 	
+	
+	if DEBUG_ALL_PACKETS_TO_MY_MAC:
+		print ("["+packet+"]")
+	
 	#CUT UDP HEADER FROM PACKET
 	packet = packet[ETHERNET_HEADER_SIZE*2:]
-	
 
-	
+
+
 	############################################
 	## IPV4 
 	############################################
@@ -42,10 +51,15 @@ def decode(packet, my_port):
 	if ipv4_decoded['protocol'] != IP_PROT_UDP:
 		return -1
 	
+	
+	if DEBUG_ALL_PACKETS_TO_MY_IP:
+		print ("["+packet+"]")
+	
 	#CUT IP HEADER FROM PACKET
 	packet = packet[IP_HEADER_SIZE*2:]
-	
-	
+
+
+
 	############################################
 	## UDP 
 	############################################
@@ -54,6 +68,12 @@ def decode(packet, my_port):
 	if udp_decoded['dest_port'] != my_port:
 		return -1
 
+	if DEBUG_ALL_PACKETS_TO_MY_PORT:
+		print ("["+packet+"]")
+
+	if DEBUG_ALL_PACKETS_RECEIVE_MESSAGE:
+		print ("["+udp_decoded['data']+"]")
+		
 	return {
 		'from_ip': hextoip(ipv4_decoded['src_ip']),
 		'from_port': udp_decoded['src_port'],

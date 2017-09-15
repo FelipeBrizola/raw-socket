@@ -8,5 +8,5 @@ if __name__ == "__main__":
 	win = False
 	loose = False
 	
-	my_api.request('{ "function":"QUESTIONS_REQUEST", "level":1 }', "192.168.1.106", 50000, 25000)
+	print my_api.request('{ "function":"QUESTIONS_REQUEST", "level":1 }', "192.168.1.106", 50000, 25000)
 	#while( !win && !loose ):

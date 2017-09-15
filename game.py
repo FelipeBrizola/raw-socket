@@ -17,11 +17,7 @@ class Game:
 		indexOfQuestion = randint(0, 1)
 		questionsOfLevel = questions[level]
 		question = questionsOfLevel[indexOfQuestion]
-		#print ' {"'+FUNCTION+'":'+QUESTIONS_RESPONSE+'} '
-		json_response = json.loads( ' {"'+FUNCTION+'":"'+QUESTIONS_RESPONSE+'"} ')
-		#print json_response
-		json_response['question'] = question
-		return json.dumps(json_response)
+		return json.dumps(question)
 
 
 if __name__ == "__main__":
