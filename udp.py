@@ -11,7 +11,7 @@ def decode(encodedPacket):
 		"dest_port": hi(encodedPacket[4:8]),
 		"length": hi(encodedPacket[8:12]),
 		"checksum": encodedPacket[12:16],
-		"data": encodedPacket[16:]
+		"data": encodedPacket[16:].decode("hex")
 	}
 
 	
