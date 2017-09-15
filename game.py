@@ -28,7 +28,7 @@ class Game:
 		return '{"message":"Bem vindo ao show do milhao"}'
 
 	def handleCongratulationsMessageRequest(self):
-		return '{"message":"Parabens, você ganhou no show do milhão"}'
+		return '{"message":"Parabens, você ganhou no show do milhao!"}'
 
 
 if __name__ == "__main__":
