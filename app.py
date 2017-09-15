@@ -24,5 +24,5 @@ def receiveUdpPackage(port):
 def sendUdpPackage(message, dest_ip, dest_port, src_port):
     ethernet_packet = packet.build(message, dest_ip, dest_port, src_port)
     sock = create_socket()
-    sock.sendto(ethernet_packet.decode("hex"), ("enp4s0", 0))
+    sock.sendto(ethernet_packet.decode("hex"), ("enp2s0", 0))
 
