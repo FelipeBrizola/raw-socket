@@ -8,9 +8,12 @@ class Game:
 		if request[FUNCTION] == QUESTIONS_REQUEST:
 			return self.handleQuestionsRequest(request['level'])
 
-		if request[FUNCTION] == GAME_INTRODUCTION:
-			return self.handleGameIntroductionRequest()
+		if request[FUNCTION] == WELCOME_MESSAGE:
+			return self.handleWelcomeMessageRequest()
 		
+		if request[FUNCTION] == CONGRATULATIONS_MESSAGE:
+			return self.handleCongratulationsMessageRequest()
+
 		return -1
 
 	def handleQuestionsRequest(self, level):
@@ -21,8 +24,11 @@ class Game:
 		question = questionsOfLevel[indexOfQuestion]
 		return json.dumps(question)
 
-	def handleGameIntroductionRequest(self):
+	def handleWelcomeMessageRequest(self):
 		return '{"message":"Bem vindo ao show do milhao"}'
+
+	def handleCongratulationsMessageRequest(self):
+		return '{"message":"Parabens, você ganhou no show do milhão"}'
 
 
 if __name__ == "__main__":

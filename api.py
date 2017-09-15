@@ -3,6 +3,7 @@ import packet
 import utils
 import time
 import json
+from debug import *
 
 class API:
 
@@ -37,6 +38,10 @@ class API:
 		
 	def listen(self, request_processor, port):
 		(status, packet_info) = self.receiveUdpPackage(port)
-		response = request_processor.process_request(json.loads(packet_info['message']))
+		response = request_processor.process_request(json.loads(packet_info['message']) )
+		if DEBUG_LISTEN:
+			print "[RECEIVED] | REQUEST_BODY ==> "+ packet_info['message']
 		time.sleep(1)
+		if DEBUG_LISTEN:
+			print "[RESPONSE] | RESPONSE ==> "+ response
 		self.sendUdpPackage(response, packet_info['from_ip'], packet_info['from_port'], port)

@@ -1,13 +1,18 @@
-QUESTIONS_REQUEST = "QUESTIONS_REQUEST"
-GAME_INTRODUCTION = "GAME_INTRODUCTION"
 FUNCTION = 'function'
 
-def requestGameIntroduction():
-    return '{ "'+FUNCTION+'":"'+GAME_INTRODUCTION+'" }'
+
+QUESTIONS_REQUEST = "QUESTIONS_REQUEST"
+WELCOME_MESSAGE = "WELCOME_MESSAGE"
+CONGRATULATIONS_MESSAGE = "CONGRATULATIONS_MESSAGE"
+
+def requestWelcomeMessage():
+    return '{ "'+FUNCTION+'":"'+WELCOME_MESSAGE+'" }'
 
 def requestQuestion(level):
     return '{ "'+FUNCTION+'":"'+QUESTIONS_REQUEST+'", "level":'+str(level)+' }'
 
+def requestCongratulationsMessage():
+    return '{ "'+FUNCTION+'":"'+CONGRATULATIONS_MESSAGE+'" }'
 
 	
 	
@@ -16,4 +21,5 @@ def requestQuestion(level):
 ###############################
 if __name__ == "__main__":
     print requestQuestion(1)
-    print requestGameIntroduction()
+    print requestWelcomeMessage()
+    print requestCongratulationsMessage()
