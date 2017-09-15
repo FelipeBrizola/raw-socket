@@ -4,10 +4,12 @@ from functions import *
 class Game:
 
 	def process_request(self, message):
-		request = json.loads(message)
 		
 		if request[FUNCTION] == QUESTIONS_REQUEST:
 			return self.handleQuestionsRequest(request['level'])
+
+		if request[FUNCTION] == GAME_INTRODUCTION:
+			return self.handleGameIntroductionRequest()
 		
 		return -1
 
@@ -19,7 +21,11 @@ class Game:
 		question = questionsOfLevel[indexOfQuestion]
 		return json.dumps(question)
 
+	def handleGameIntroductionRequest(self):
+		return '{"message":"Bem vindo ao show do milhao"}'
+
 
 if __name__ == "__main__":
 	g = Game()
 	print g.process_request('{ "function":"QUESTIONS_REQUEST", "level":1 }')
+	print g.process_request('{ "function":"GAME_INTRODUCTION"}')

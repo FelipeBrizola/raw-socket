@@ -2,6 +2,7 @@ import socket
 import packet
 import utils
 import time
+import json
 
 class API:
 
@@ -32,10 +33,10 @@ class API:
 	def request(self, message, dest_ip, dest_port, src_port):
 		self.sendUdpPackage(message, dest_ip, dest_port, src_port)
 		(status, response) = self.receiveUdpPackage(src_port)
-		return response['message']
+		return json.loads(response['message'])
 		
 	def listen(self, request_processor, port):
 		(status, packet_info) = self.receiveUdpPackage(port)
-		response = request_processor.process_request(packet_info['message'])
+		response = request_processor.process_request(json.loads(packet_info['message']))
 		time.sleep(1)
 		self.sendUdpPackage(response, packet_info['from_ip'], packet_info['from_port'], port)
