@@ -53,7 +53,7 @@ def play(server_ip, server_port, my_port):
 		return
 
 	printCongratulationsMessage()
-	print "Sua recompensa é de "+str(reward)+" reais\n"
+	print "Sua recompensa foi de "+str(reward)+" reais\n"
 
 if __name__ == "__main__":
 	my_api = API()
