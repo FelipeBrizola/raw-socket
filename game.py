@@ -7,21 +7,21 @@ class Game:
 		request = json.loads(message)
 		
 		if request[FUNCTION] == QUESTIONS_REQUEST:
-			return self.sortQuestionByLevel(request['level'])
+			return self.handleQuestionsRequest(request['level'])
 		
 		return -1
 
-	def sortQuestionByLevel(self, level):
+	def handleQuestionsRequest(self, level):
 		with open('questions.json') as json_data:
 			questions = json.load(json_data)
 		indexOfQuestion = randint(0, 1)
 		questionsOfLevel = questions[level]
-		
-		json_response = json.loads( ' {"'+FUNCTION+'":'+QUESTIONS_RESPONSE+'} ')
-		json_response['question'] = questionsOfLevel[indexOfQuestion]
+		question = questionsOfLevel[indexOfQuestion]
+		#print ' {"'+FUNCTION+'":'+QUESTIONS_RESPONSE+'} '
+		json_response = json.loads( ' {"'+FUNCTION+'":"'+QUESTIONS_RESPONSE+'"} ')
+		#print json_response
+		json_response['question'] = question
 		return json.dumps(json_response)
-		
-
 
 
 if __name__ == "__main__":

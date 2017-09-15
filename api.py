@@ -38,4 +38,3 @@ class API:
 		response = request_processor.process_request(packet_info['message'])
 		time.sleep(1)
 		self.sendUdpPackage(response, packet_info['from_ip'], packet_info['from_port'], port)
-

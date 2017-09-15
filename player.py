@@ -10,4 +10,4 @@ if __name__ == "__main__":
 	loose = False
 	
 	while( !win && !loose ):
-		client
+		my_api.request()
