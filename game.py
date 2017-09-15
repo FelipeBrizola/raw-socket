@@ -28,7 +28,7 @@ class Game:
 		return json.dumps(question)
 
 	def handleWelcomeMessageRequest(self):
-		return '{"message":"####################################\nBem vindo ao show do milhao\nResponda as perguntas corretamente"}'
+		return '{"messages":[ "Bem vindo ao show do milhao"],["Responda as perguntas corretamente"]}'
 
 	def handleCongratulationsMessageRequest(self):
 		return '{"message":"Parabens, voce ganhou no show do milhao!"}'
