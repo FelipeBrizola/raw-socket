@@ -43,5 +43,5 @@ class API:
 			print "\n[RECEIVED] | REQUEST_BODY ==> "+ packet_info['message']
 		time.sleep(1)
 		if DEBUG_LISTEN:
-			print "[RESPONSE] | RESPONSE ==> "+ response+"\n"
+			print "[RESPONSE] | RESPONSE_BODY ==> "+ response+"\n"
 		self.sendUdpPackage(response, packet_info['from_ip'], packet_info['from_port'], port)

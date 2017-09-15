@@ -13,7 +13,10 @@ class Game:
 		
 		if request[FUNCTION] == CONGRATULATIONS_MESSAGE:
 			return self.handleCongratulationsMessageRequest()
-
+		
+		if request[FUNCTION] == GAME_OVER_MESSAGE:
+			request self.handleGameOverMessageRequest():
+			
 		return -1
 
 	def handleQuestionsRequest(self, level):
@@ -25,11 +28,13 @@ class Game:
 		return json.dumps(question)
 
 	def handleWelcomeMessageRequest(self):
-		return '{"message":"Bem vindo ao show do milhao"}'
+		return '{"message":"####################################\nBem vindo ao show do milhao\nResponda as perguntas corretamente"}'
 
 	def handleCongratulationsMessageRequest(self):
 		return '{"message":"Parabens, voce ganhou no show do milhao!"}'
 
+	def handleGameOverMessageRequest(self):
+		return '{"message":"Voce PERDEU :( | GAME OVER | BYE"}'
 
 if __name__ == "__main__":
 	g = Game()

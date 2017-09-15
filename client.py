@@ -1,5 +1,7 @@
 from api import API
 from functions import *
+import sys
+
 
 def printWelcomeMessage():
 	welcome_message = my_api.request(requestWelcomeMessage(), server_ip, server_port, my_port)['message']
@@ -8,6 +10,10 @@ def printWelcomeMessage():
 def printCongratulationsMessage():
 	congratulations_message = my_api.request(requestCongratulationsMessage(), server_ip, server_port, my_port)['message']
 	print '\n' + congratulations_message + '\n'
+
+def printGameOverMessage():
+	game_over_message = my_api.request(requestGameOverMessage(), server_ip, server_port, my_port)['message']
+	print '\n' + game_over_message + '\n'
 
 def askQuestion(level):
 	response = my_api.request(requestQuestion(level), server_ip, server_port, my_port)
@@ -21,7 +27,7 @@ def askQuestion(level):
 	return (res-1) == response['correctAnswerIndex'], response['reward']
 
 
-def play(server_ip, server_port, my_port):
+def play():
 
 	printWelcomeMessage()
 
@@ -31,7 +37,8 @@ def play(server_ip, server_port, my_port):
 		print "\nResposta CORRETA"
 		print "Parabens voce esta com "+str(reward)+" reais\n"
 	else:
-		print "\nResposta ERRADA\nGAME OVER MY FRIEND\n"
+		print "\nResposta ERRADA"
+		printGameOverMessage()
 		return
 
 
@@ -41,7 +48,8 @@ def play(server_ip, server_port, my_port):
 		print "\nResposta CORRETA"
 		print "Parabens voce esta com "+str(reward)+" reais\n"
 	else:
-		print "\nResposta ERRADA\nGAME OVER MY FRIEND\n"
+		print "\nResposta ERRADA"
+		printGameOverMessage()
 		return
 
 	correct, reward = askQuestion(2)
@@ -49,7 +57,8 @@ def play(server_ip, server_port, my_port):
 	if correct:
 		print "\nResposta CORRETA\n"
 	else:
-		print "\nResposta ERRADA\nGAME OVER MY FRIEND\n"
+		print "\nResposta ERRADA"
+		printGameOverMessage()
 		return
 
 	printCongratulationsMessage()
@@ -57,8 +66,7 @@ def play(server_ip, server_port, my_port):
 
 if __name__ == "__main__":
 	my_api = API()
-	my_port = 25000
-	server_port = 50000
-	server_ip = "192.168.1.106"
-
-	play(server_ip, server_port, my_port)
+	server_ip = sys.argv[1]
+	server_port = int(sys.argv[2])
+	my_port = int(sys.argv[3])
+	play()
