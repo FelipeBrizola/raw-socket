@@ -6,9 +6,10 @@ import ethernet
 import ipv4
 import udp
 
-import app
 
-def recv(packet, my_port):
+#returns -1 if the packet is not for our machine
+#returns object with message, src_ip and src_port if packet is for our machine
+def decode(packet, my_port):
 	my_mac = utils.getLocalMac()
 	my_ip = utils.getLocalIP()	
 	
@@ -53,7 +54,7 @@ def recv(packet, my_port):
 	if udp_decoded['dest_port'] != my_port:
 		return -1
 
-	return{
+	return {
 		'from_ip': hextoip(ipv4_decoded['src_ip']),
 		'from_port': udp_decoded['src_port'],
 		'to_port': udp_decoded['dest_port'],
@@ -62,11 +63,11 @@ def recv(packet, my_port):
 	
 	
 
-def build(message, dest_ip, dest_port, src_port ):
+#Encode the message using ETHERNET + IP + UDP protocols
+def encode(message, dest_ip, dest_port, src_port ):
 	udp_packet = udp.encode(message, src_port, dest_port )
 	ip_packet = ipv4.encode(udp_packet, utils.getLocalIP(), dest_ip )
 	ethernet_packet = ethernet.encode(ip_packet, utils.getLocalMac(), utils.getMacByIP(dest_ip)) #e894f6acea70  #24f5aa67cf7a
-	
 	return ethernet_packet
 	
 	
@@ -75,8 +76,8 @@ def build(message, dest_ip, dest_port, src_port ):
 ########### TESTS #############
 ###############################
 if __name__ == "__main__":
-	#build("29831298739812798371298371982213", "192.168.1.102", 15015)
-	recv("985fd3613bfa24f5aa67cf7a08004500003c11110000401100007f000101c0a8016604d23aa7002800003239383331323938373339383132373938333731323938333731393832323133")
+	#encode("29831298739812798371298371982213", "192.168.1.102", 15015)
+	decode("985fd3613bfa24f5aa67cf7a08004500003c11110000401100007f000101c0a8016604d23aa7002800003239383331323938373339383132373938333731323938333731393832323133")
 	
 	
 	

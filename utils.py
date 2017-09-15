@@ -3,7 +3,9 @@ from fm import *
 from uuid import getnode
 import re
 import socket
-             
+def getMyInterfaceName():
+	return "enp2s0"
+	
 def getMacDefaultGateway():
 	return getMacByIP( get_default_gateway_ip_linux() )
 
