@@ -24,9 +24,9 @@ class API:
 
 
 	def sendUdpPackage(self, message, dest_ip, dest_port, src_port):
-		ethernet_packet = packet.build(message, dest_ip, dest_port, src_port)
-		packet = ethernet_packet.decode("hex") # Decode from hexadecimal to bytes
-		self.my_socket.sendto(packet, (utils.getMyInterfaceName(), 0))
+		ethernet_packet = packet.encode(message, dest_ip, dest_port, src_port)
+		packet_build = ethernet_packet.decode("hex") # Decode from hexadecimal to bytes
+		self.my_socket.sendto(packet_build, (utils.getMyInterfaceName(), 0))
 	
 	
 	def request(self, message, dest_ip, dest_port, src_port):
