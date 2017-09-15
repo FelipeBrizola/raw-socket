@@ -3,7 +3,7 @@ from random import randint
 from functions import *
 class Game:
 
-	def process_request(self, message):
+	def process_request(self, request):
 		
 		if request[FUNCTION] == QUESTIONS_REQUEST:
 			return self.handleQuestionsRequest(request['level'])
